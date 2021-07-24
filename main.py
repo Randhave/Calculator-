@@ -19,26 +19,19 @@ class Calculator:
         self.text_field = Entry(self.window, justify=CENTER, font=font)
         self.text_field.pack(side=TOP, pady=5, fill=X, padx=10)
         self.sc_calci = Scientific_calculator(self.window, self.frame, self.text_field)
-
-    # def text_field(self):
-    #     self.text_field = Entry(self.window, justify=CENTER, font=font)
-    #     self.text_field.pack(side=TOP, pady=5, fill=X, padx=10)
+ 
 
     def create_frame(self):
-        # frame created in constructor and pack here
+      
         self.frame.pack(side=TOP)
-
-    def buttons(self):
-        # self.btn1 = Button(self.frame, text='1', font=font)  # printing buttons one by one not using grid system
-        # self.btn1.pack(side=TOP)
-
+ 
         self.temp = 1
         for i in range(3):
             for j in range(3):
                 self.btn = Button(self.frame, text=str(self.temp), font=font, relief='ridge', width=5,activeforeground='white', activebackground="orange")
                 self.btn.grid(row=i, column=j, pady=3, padx=3)
                 self.temp = self.temp + 1
-                self.btn.bind('<Button-1>', self.click_event)  # '<Button-1>' left click of your mouse button, and bind() it is predefined funtion , this is same like to onChange() function in javascript
+                self.btn.bind('<Button-1>', self.click_event) 
 
     def other_keys(self):
         self.plus_btn = Button(self.frame, text='+', font=font, relief='ridge', width=5, activeforeground='white',activebackground="orange")
@@ -101,7 +94,7 @@ class Calculator:
             return clear_input
 
         if self.text == '=':
-            # when user type invalid expression that's way use try except functions
+            
             try:
                 query = self.text_field.get()
                 answer = eval(query)
@@ -112,22 +105,21 @@ class Calculator:
 
             return answer
 
-        self.text_field.insert(END, self.text)  # END it means user input will be insert at last position not first
-
+        self.text_field.insert(END, self.text)  
     def click_event(self, event):
-        self.input = event.widget  # widget it is keyword it recognize or get user input value by event
+        self.input = event.widget 
         self.text = self.input['text']
-        # print(self.text)
+        
         self.evalute_query()
 
     def run(self):
-        # self.text_field()
+       
         self.create_frame()
         self.buttons()
         self.other_keys()
         self.binding_functions()
         self.sc_calci.sc_calci_function()
-        self.window.mainloop()  # without this code window screen are not show
+        self.window.mainloop()  
         print("Hello Friends....")
 
 #  Scientific_calculator  is main class
@@ -138,11 +130,11 @@ class Scientific_calculator:
         self.window = window
         self.sc_frame = Frame(self.window)
         self.menubar = Menu(
-        self.window)  # create menu and store menubar variable and this menubar add in these parent_screen means self.window
-        self.mode = Menu(self.menubar, font=sc_font,tearoff=0)  # and created main mode when user click on then show scientific_calculator and this mode add in menubar
-        self.mode.add_command(label="Scientific Calculator", command=self.show_sc_calci)  # add_command it add button on mode variable
-        self.menubar.add_cascade(label="Scientific Calculator", menu=self.mode)  # add_cascade this are the add navbar vertically
-        self.window.config(menu=self.menubar)  # config keyword it show navbar on window screen
+        self.window)   
+        self.mode = Menu(self.menubar, font=sc_font,tearoff=0)  
+        self.mode.add_command(label="Scientific Calculator", command=self.show_sc_calci) 
+        self.menubar.add_cascade(label="Scientific Calculator", menu=self.mode)   
+        self.window.config(menu=self.menubar)  
 
     def sc_buttons(self):
         self.sqrt_btn = Button(self.sc_frame, text='sqrt', font=font, width=5, relief='ridge',activebackground="orange")
@@ -169,7 +161,7 @@ class Scientific_calculator:
         self.to_redient = Button(self.sc_frame, text='toRed', font=font, width=5, relief='ridge',activebackground="orange")
         self.to_redient.grid(row=1, column=3, padx=2, pady=3)
 
-    # This function bind another funtions , it means when user press any key then this function bind scientific_click_event function each and every keys
+    
     def binding_sc_functions(self):
         self.sqrt_btn.bind('<Button-1>', self.scientific_click_event)
         self.fact_btn.bind('<Button-1>', self.scientific_click_event)
@@ -180,12 +172,12 @@ class Scientific_calculator:
         self.tan_btn.bind('<Button-1>', self.scientific_click_event)
         self.to_redient.bind('<Button-1>', self.scientific_click_event)
 
-    #  This function take user input form keys
+   
     def scientific_click_event(self, event):
         self.input = event.widget
         self.text = self.input['text']
         self.query = self.text_field.get()
-        # print(self.query)
+     
         self.answer = ''
 
         try:
@@ -238,7 +230,7 @@ class Scientific_calculator:
             self.normal_mode = True
 
     def sc_calci_function(self):
-        # self.show_sc_calci()  # not call here it call automatically when user click on scientific mode
+      
         self.sc_buttons()
         self.binding_sc_functions()
 
